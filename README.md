@@ -30,10 +30,3 @@ Filepath to image
 | 2      | /        | id                                | DELETE | /?id=1                                                       |
 
 Remember to send DELETE request after get the id card.
-
-## **Running This Service**
-
-`chmod +x id_card_service_run.sh`
-
-`./id_card_service_run.sh`
-
