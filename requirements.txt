@@ -1,0 +1,10 @@
+Click==7.0
+Flask==1.1.1
+img2pdf==0.3.3
+itsdangerous==1.1.0
+Jinja2==2.10.3
+MarkupSafe==1.1.1
+Pillow==6.2.1
+pypng==0.0.20
+PyQRCode==1.2.1
+Werkzeug==0.16.0
