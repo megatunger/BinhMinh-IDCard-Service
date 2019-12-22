@@ -24,6 +24,14 @@ Filepath to image
 
 ## **API Examples**
 
+| Number | API Link | Params                            | Method | Examples                                                     |
+| ------ | -------- | --------------------------------- | ------ | ------------------------------------------------------------ |
+| 1      | /        | id, name, birthday, school, phone | POST   | /?id=1&name="Hoàng Sơn Tùng"&birthday="08/08/1999"&school=ABCD&phone=0967134899 |
+|        | /        |                                   | DELETE |                                                              |
+|        |          |                                   |        |                                                              |
+
+
+
 ## **Running This Service**
 
 `chmod +x id_card_service_run.sh`

@@ -1,16 +1,23 @@
-from flask import Flask, request
+from flask import Flask, request, send_file, redirect, url_for, send_from_directory
 import sys
 import os
 import img2pdf
 import pyqrcode
 from PIL import Image, ImageOps, ImageFont, ImageDraw
 
+BASE_DIR = os.path.dirname(__file__)
+UPLOAD_FOLDER = 'output'
+
 app = Flask(__name__)
-
-
 @app.route('/')
 def get():
     return 'POST request available only.'
+
+@app.route('/output/<path:filename>', methods=['GET', 'POST'])
+def download(filename):
+    uploads = os.path.join(BASE_DIR, UPLOAD_FOLDER)
+    return send_from_directory(directory=uploads, filename=filename)
+
 
 @app.route('/', methods = ['POST'])
 def main():
@@ -34,7 +41,6 @@ def clearCache():
 
 if __name__ == '__main__':
     app.run()
-
 
 def process(id, name, birthday, school, phone):
     # Set params
@@ -66,16 +72,22 @@ def process(id, name, birthday, school, phone):
 
     # Create qr image
     qr = pyqrcode.create(id)
-    filename = 'output/qr/' + id + '.png'
-    os.makedirs(os.path.dirname(filename), exist_ok=True)
-    qr.png(filename, scale=16)
+
+    filename_qr_png = 'output/qr/' + id + '.png'
+    os.makedirs(os.path.dirname(filename_qr_png), exist_ok=True)
+
+    qr.png(filename_qr_png, scale=16)
 
     # QR image is superimposed on the ID-card image with itself as a filter
-    qr_img = Image.open(filename)
+    qr_img = Image.open(filename_qr_png)
     img.paste(qr_img, (1334, 383))
 
     #Save to disk
-    img.save(filename)
+
+    filename_png = 'output/png/' + id + '.png'
+    os.makedirs(os.path.dirname(filename_png), exist_ok=True)
+
+    img.save(filename_png)
 
     # To convert to pdf the image is temporarily stored as jpeg
     rgb_img = img.convert('RGB')
@@ -84,8 +96,12 @@ def process(id, name, birthday, school, phone):
 
     # The jpeg file is converted to pdf.
     pdf_bytes = img2pdf.convert("temp.jpg")
-    file = open("output/pdf/" + id + ".pdf", "wb")
+
+    filename_pdf = 'output/pdf/' + id + '.pdf'
+    os.makedirs(os.path.dirname(filename_pdf), exist_ok=True)
+
+    file = open(filename_pdf, "wb")
     file.write(pdf_bytes)
     os.remove("temp.jpg")
 
-    return {'card_image': 'output/png/' + id + '.png', 'qr_image':'output/qr/' + id + '.png', 'pdf': 'output/pdf/' + id + '.pdf'}
+    return {'card_image': filename_png, 'qr_image': filename_qr_png, 'pdf': filename_pdf}
