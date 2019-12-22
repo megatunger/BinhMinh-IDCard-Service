@@ -27,10 +27,9 @@ Filepath to image
 | Number | API Link | Params                            | Method | Examples                                                     |
 | ------ | -------- | --------------------------------- | ------ | ------------------------------------------------------------ |
 | 1      | /        | id, name, birthday, school, phone | POST   | /?id=1&name="Hoàng Sơn Tùng"&birthday="08/08/1999"&school=ABCD&phone=0967134899 |
-|        | /        |                                   | DELETE |                                                              |
-|        |          |                                   |        |                                                              |
+| 2      | /        | id                                | DELETE | /?id=1                                                       |
 
-
+Remember to send DELETE request after get the id card.
 
 ## **Running This Service**
 
