@@ -26,7 +26,8 @@ def main():
     birthday = request.args.get('birthday', ' ')
     school = request.args.get('school', ' ')
     phone = request.args.get('phone', ' ')
-    return process(id, name, birthday, school, phone)
+    id_encrypt = request.args.get('id_encrypt', ' ')
+    return process(id, name, birthday, school, phone, id_encrypt)
 
 @app.route('/', methods = ['DELETE'])
 def clearCache():
@@ -39,10 +40,7 @@ def clearCache():
     except:
         return "file not found."
 
-if __name__ == '__main__':
-    app.run()
-
-def process(id, name, birthday, school, phone):
+def process(id, name, birthday, school, phone, id_encrypt):
     # Set params
     string_limit = 21
     id = id[:string_limit]
@@ -50,7 +48,7 @@ def process(id, name, birthday, school, phone):
     birthday = birthday[:string_limit]
     school = school[:string_limit]
     phone = phone[:string_limit]
-
+    id_encrypt = id_encrypt[:string_limit]
     # opening image
     img = Image.open("plain.png")
     draw = ImageDraw.Draw(img)
@@ -71,7 +69,7 @@ def process(id, name, birthday, school, phone):
     draw.text((left_margin, start_text + line_spacing*4), phone, (74, 75, 76), font=font_regular)
 
     # Create qr image
-    qr = pyqrcode.create(id)
+    qr = pyqrcode.create('{"login_token":"'+id_encrypt+'","otp": "offline_card"}')
 
     filename_qr_png = 'output/qr/' + id + '.png'
     os.makedirs(os.path.dirname(filename_qr_png), exist_ok=True)
@@ -105,3 +103,6 @@ def process(id, name, birthday, school, phone):
     os.remove("temp.jpg")
 
     return {'card_image': filename_png, 'qr_image': filename_qr_png, 'pdf': filename_pdf}
+
+if __name__ == '__main__':
+    app.run()
