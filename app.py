@@ -48,7 +48,7 @@ def process(id, name, birthday, school, phone, id_encrypt):
     birthday = birthday[:string_limit]
     school = school[:string_limit]
     phone = phone[:string_limit]
-    id_encrypt = id_encrypt[:string_limit]
+    id_encrypt = id_encrypt
     # opening image
     img = Image.open("plain.png")
     draw = ImageDraw.Draw(img)
@@ -74,7 +74,7 @@ def process(id, name, birthday, school, phone, id_encrypt):
     filename_qr_png = 'output/qr/' + id + '.png'
     os.makedirs(os.path.dirname(filename_qr_png), exist_ok=True)
 
-    qr.png(filename_qr_png, scale=16)
+    qr.png(filename_qr_png, scale=8)
 
     # QR image is superimposed on the ID-card image with itself as a filter
     qr_img = Image.open(filename_qr_png)
