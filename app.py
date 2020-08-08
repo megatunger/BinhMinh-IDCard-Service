@@ -80,7 +80,7 @@ def process(id, name, school, id_encrypt):
     os.makedirs(os.path.dirname(filename_back_png), exist_ok=True)
 
     img_front.save(filename_front_png)
-    img_front.save(filename_back_png)
+    img_back.save(filename_back_png)
 
     # To convert to pdf the image is temporarily stored as jpeg
     rgb_img_front = img_front.convert('RGB')
