@@ -70,7 +70,7 @@ def process(id, name, school, id_encrypt):
 
     # QR image is superimposed on the ID-card image with itself as a filter
     qr_img = Image.open(filename_qr_png)
-    img_front.paste(qr_img, (1215, 345))
+    img_front.paste(qr_img, (1220, 350))
 
     #Save to disk
 
