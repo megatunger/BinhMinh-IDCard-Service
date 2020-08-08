@@ -1,3 +1,4 @@
+gunicorn==20.0.4
 Flask==1.1.2
 img2pdf==0.4.0
 itsdangerous==1.1.0
