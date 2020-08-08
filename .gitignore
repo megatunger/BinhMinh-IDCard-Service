@@ -125,7 +125,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-output/
 static/
 templates/
 .idea/workspace.xml
+/output/qr/
+/output/pdf/
+/output/png/
