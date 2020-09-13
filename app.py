@@ -25,7 +25,7 @@ def clearCache():
 
 def process(id, name, school):
     # Set params
-    string_limit = 21
+    string_limit = 27
     id = id[:string_limit]
     name = name[:string_limit]
     school = school[:string_limit]
