@@ -40,7 +40,7 @@ def process(id, name, school):
 
     draw.text((193, 403), id, (22, 28, 42), font=font_bold)
     draw.text((193, 711), name, (22, 28, 42), font=font_bold)
-    draw.text((193, 1010), school, (22, 28, 42), font=font_bold)
+    draw.text((193, 1015), school, (22, 28, 42), font=font_bold)
 
     # Save to disk
 
